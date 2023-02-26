@@ -1,6 +1,23 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:milestone_project/modules/counter_app.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  var envName = const String.fromEnvironment('env_name', defaultValue: '');
+  if (kDebugMode) {
+    print('App get env name from build agruments $envName');
+  }
+
+  await dotenv.load(fileName: envName);
+
+  if (kDebugMode) {
+    print('App loaded env config from $envName successfully');
+    print('------------------------');
+    print('${dotenv.get('APP_NAME')} ready !!! ');
+    print('------------------------');
+  }
+
   runApp(const MyApp());
 }
 
@@ -11,7 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: dotenv.get('APP_NAME'),
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -24,7 +41,10 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const CounterApp(
+        key: Key('test'),
+      ),
     );
   }
 }
