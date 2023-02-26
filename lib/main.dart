@@ -4,6 +4,7 @@ import 'package:milestone_project/app_inherited_widget.dart';
 import 'package:milestone_project/app_state.dart';
 import 'package:milestone_project/modules/counter_app.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:milestone_project/modules/home/view/home_page.dart';
 
 void main() async {
   var envName = const String.fromEnvironment('env_name', defaultValue: '');
@@ -39,9 +40,7 @@ class MyApp extends StatelessWidget {
       home: const AppState(
         child: AppInheritedWidget(
           color: Colors.red,
-          child: CounterApp(
-            key: Key('test'),
-          ),
+          child: HomePage(),
         ),
       ),
     );

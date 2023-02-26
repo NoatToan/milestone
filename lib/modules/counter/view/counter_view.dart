@@ -12,6 +12,9 @@ class CounterView extends AppBaseView {
   const CounterView({super.key});
 
   @override
+  Text get textTitle => const Text('Counter page');
+
+  @override
   Widget floatingActionButton(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
