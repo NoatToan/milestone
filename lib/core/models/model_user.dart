@@ -1,28 +1,28 @@
-class BaseModelUser {
+class ModelUser {
   final String id;
   final String name;
 
-  const BaseModelUser({
+  const ModelUser({
     required this.id,
     required this.name,
   });
 
-  BaseModelUser copyWith({
+  ModelUser copyWith({
     String? id,
     String? name,
   }) {
-    return BaseModelUser(
+    return ModelUser(
       id: id ?? this.id,
       name: name ?? this.name,
     );
   }
 
-  factory BaseModelUser.fromMap(Map<String, dynamic> map) {
-    return BaseModelUser(
+  factory ModelUser.fromMap(Map<String, dynamic> map) {
+    return ModelUser(
       id: map['id'] as String,
       name: map['name'] as String,
     );
   }
 
-  static const BaseModelUser ex = BaseModelUser(id: 'id', name: 'name');
+  static const ModelUser ex = ModelUser(id: 'id', name: 'name');
 }

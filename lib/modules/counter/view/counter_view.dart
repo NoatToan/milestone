@@ -21,12 +21,14 @@ class CounterView extends AppBaseView {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         FloatingActionButton(
+          heroTag: '1',
           key: const Key('counterView_increment_floatingActionButton'),
           child: const Icon(Icons.add),
           onPressed: () => context.read<CounterCubit>().increment(),
         ),
         const SizedBox(height: 8),
         FloatingActionButton(
+          heroTag: '2',
           key: const Key('counterView_decrement_floatingActionButton'),
           child: const Icon(Icons.remove),
           onPressed: () => context.read<CounterCubit>().decrement(),
