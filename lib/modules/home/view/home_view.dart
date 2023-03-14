@@ -4,6 +4,7 @@ import 'package:milestone_project/app_base_view.dart';
 import 'package:milestone_project/core/factories/factory_model.dart';
 import 'package:milestone_project/main.dart';
 import 'package:milestone_project/modules/counter/counter.dart';
+import 'package:milestone_project/modules/list_animation/view/list_animation_page.dart';
 
 class HomeView extends AppBaseView {
   const HomeView({Key? key}) : super(key: key);
@@ -27,6 +28,21 @@ class HomeView extends AppBaseView {
                       MaterialPageRoute(
                         /// nav to new page
                         builder: (context) => const CounterPage(),
+
+                        /// nav to new app
+                        // builder: (context) => const CounterApp(),
+                      ),
+                    );
+                  },
+                ),
+                ElevatedButton(
+                  child: const Text('Goto animation list'),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        /// nav to new page
+                        builder: (context) => ListAnimationPage(),
 
                         /// nav to new app
                         // builder: (context) => const CounterApp(),

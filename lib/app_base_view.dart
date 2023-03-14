@@ -26,8 +26,17 @@ abstract class AppBaseView extends StatelessWidget {
         // TODO: load dynamic layout scaffold
         appBar: AppBar(
           title: textTitle,
+          toolbarHeight: 30,
+          leadingWidth: 10,
+          toolbarTextStyle: TextStyle(fontSize: 10),
+          titleTextStyle: TextStyle(fontSize: 18),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: Icon(Icons.account_circle_outlined),
+            ),
+          ],
         ),
-
         body: Center(
           child: body(context),
         ),

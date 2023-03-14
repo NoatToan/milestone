@@ -24,5 +24,6 @@ class ThemeDefault {
             ),
           ),
         ),
+        indicatorColor: Colors.red,
       );
 }
