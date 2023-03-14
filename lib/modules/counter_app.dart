@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:milestone_project/modules/counter/view/counter_page.dart';
+
+import 'counter/counter.dart';
 
 /// {@template counter_app}
 /// A [MaterialApp] which sets the `home` to [CounterPage].

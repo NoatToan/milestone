@@ -22,8 +22,36 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    no-empty-block: true
+    newline-before-return:
+      severity: error
+      no-boolean-literal-compare:
+        severity: warning
+      no-empty-block:
+        severity: error
+    prefer_single_quotes: true
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+dart_code_metrics:
+  anti-patterns:
+    - long-method
+    - long-parameter-list
+  metrics:
+    cyclomatic-complexity: 20
+    maximum-nesting-level: 5
+    number-of-parameters: 8
+    source-lines-of-code: 80
+  metrics-exclude:
+    - test/**
+    - ios/**
+    - android/**
+  rules:
+    newline-before-return:
+      severity: error
+    no-boolean-literal-compare:
+      severity: warning
+    no-empty-block:
+      severity: error
+    prefer-conditional-expressions:
+      severity: warning
+    always_use_package_imports: true
+    avoid_returning_null_for_future: true

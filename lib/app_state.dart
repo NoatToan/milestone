@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class AppState extends StatefulWidget {
   const AppState({
@@ -13,8 +13,32 @@ class AppState extends StatefulWidget {
 }
 
 class _AppStateState extends State<AppState> {
+  bool _isShowLoading = false;
+
   @override
   Widget build(BuildContext context) {
-    return widget.child;
+    return Stack(children: [
+      widget.child,
+      if (_isShowLoading)
+        const Opacity(
+          opacity: 0,
+          child: ModalBarrier(dismissible: false, color: Colors.black),
+        ),
+      if (_isShowLoading)
+        Center(
+          child: CircularProgressIndicator(
+            color: Theme.of(context).primaryColor,
+            backgroundColor: Colors.black.withOpacity(0.1),
+          ),
+        ),
+    ]);
   }
+
+  showLoading() => setState(() {
+        _isShowLoading = true;
+      });
+
+  hideLoading() => setState(() {
+        _isShowLoading = false;
+      });
 }
