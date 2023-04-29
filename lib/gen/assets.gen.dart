@@ -24,12 +24,100 @@ class $AssetsColorsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/bg_1.jpg
+  AssetGenImage get bg1 => const AssetGenImage('assets/images/bg_1.jpg');
+
+  /// File path: assets/images/bg_2.jpg
+  AssetGenImage get bg2 => const AssetGenImage('assets/images/bg_2.jpg');
+
+  /// File path: assets/images/bg_3.jpg
+  AssetGenImage get bg3 => const AssetGenImage('assets/images/bg_3.jpg');
+
+  /// File path: assets/images/bg_4.jpg
+  AssetGenImage get bg4 => const AssetGenImage('assets/images/bg_4.jpg');
+
+  /// File path: assets/images/bg_5.jpg
+  AssetGenImage get bg5 => const AssetGenImage('assets/images/bg_5.jpg');
+
   /// File path: assets/images/food_empty_image.svg
   SvgGenImage get foodEmptyImage =>
       const SvgGenImage('assets/images/food_empty_image.svg');
 
+  /// File path: assets/images/ic_bookmark.svg
+  SvgGenImage get icBookmark =>
+      const SvgGenImage('assets/images/ic_bookmark.svg');
+
+  /// File path: assets/images/ic_cta.svg
+  SvgGenImage get icCta => const SvgGenImage('assets/images/ic_cta.svg');
+
+  /// File path: assets/images/ic_heart.svg
+  SvgGenImage get icHeart => const SvgGenImage('assets/images/ic_heart.svg');
+
+  /// File path: assets/images/ic_home.svg
+  SvgGenImage get icHome => const SvgGenImage('assets/images/ic_home.svg');
+
+  /// File path: assets/images/ic_instagram.svg
+  SvgGenImage get icInstagram =>
+      const SvgGenImage('assets/images/ic_instagram.svg');
+
+  /// File path: assets/images/ic_messenger.svg
+  SvgGenImage get icMessenger =>
+      const SvgGenImage('assets/images/ic_messenger.svg');
+
+  /// File path: assets/images/ic_plane_share.svg
+  SvgGenImage get icPlaneShare =>
+      const SvgGenImage('assets/images/ic_plane_share.svg');
+
+  /// File path: assets/images/ic_red_heart.svg
+  SvgGenImage get icRedHeart =>
+      const SvgGenImage('assets/images/ic_red_heart.svg');
+
+  /// File path: assets/images/ic_rounded_add.svg
+  SvgGenImage get icRoundedAdd =>
+      const SvgGenImage('assets/images/ic_rounded_add.svg');
+
+  /// File path: assets/images/ic_search.svg
+  SvgGenImage get icSearch => const SvgGenImage('assets/images/ic_search.svg');
+
+  /// File path: assets/images/ic_thinking_cloud.svg
+  SvgGenImage get icThinkingCloud =>
+      const SvgGenImage('assets/images/ic_thinking_cloud.svg');
+
+  /// File path: assets/images/ic_user_account.svg
+  SvgGenImage get icUserAccount =>
+      const SvgGenImage('assets/images/ic_user_account.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [foodEmptyImage];
+  List<dynamic> get values => [
+        bg1,
+        bg2,
+        bg3,
+        bg4,
+        bg5,
+        foodEmptyImage,
+        icBookmark,
+        icCta,
+        icHeart,
+        icHome,
+        icInstagram,
+        icMessenger,
+        icPlaneShare,
+        icRedHeart,
+        icRoundedAdd,
+        icSearch,
+        icThinkingCloud,
+        icUserAccount
+      ];
+}
+
+class $AssetsRivGen {
+  const $AssetsRivGen();
+
+  /// File path: assets/riv/icons.riv
+  String get icons => 'assets/riv/icons.riv';
+
+  /// List of all assets
+  List<String> get values => [icons];
 }
 
 class Assets {
@@ -37,6 +125,7 @@ class Assets {
 
   static const $AssetsColorsGen colors = $AssetsColorsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsRivGen riv = $AssetsRivGen();
 }
 
 class AssetGenImage {
@@ -97,7 +186,16 @@ class AssetGenImage {
     );
   }
 
-  ImageProvider provider() => AssetImage(_assetName);
+  ImageProvider provider({
+    AssetBundle? bundle,
+    String? package,
+  }) {
+    return AssetImage(
+      _assetName,
+      bundle: bundle,
+      package: package,
+    );
+  }
 
   String get path => _assetName;
 
@@ -124,9 +222,9 @@ class SvgGenImage {
     bool excludeFromSemantics = false,
     SvgTheme theme = const SvgTheme(),
     ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
-    @deprecated Clip? clipBehavior,
     @deprecated bool cacheColorFilter = false,
   }) {
     return SvgPicture.asset(
@@ -144,10 +242,10 @@ class SvgGenImage {
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
       theme: theme,
-      // colorFilter: colorFilter,
+      colorFilter: colorFilter,
       color: color,
       colorBlendMode: colorBlendMode,
-      // clipBehavior: clipBehavior,
+      clipBehavior: clipBehavior,
       cacheColorFilter: cacheColorFilter,
     );
   }

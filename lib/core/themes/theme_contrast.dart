@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class ThemeContrast {
   static ThemeData get themeData => ThemeData(
         primaryColor: Colors.black12,
-        backgroundColor: Colors.grey,
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           foregroundColor: Colors.black,
         ),
@@ -24,6 +23,11 @@ class ThemeContrast {
               ),
             ),
           ),
+        ),
+        primarySwatch: Colors.red,
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: Colors.black54,
+          modalBarrierColor: Colors.black45,
         ),
       );
 }

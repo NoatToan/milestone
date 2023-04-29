@@ -1,19 +1,18 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:milestone_project/app.dart';
+import 'package:milestone_project/app_bloc.dart';
 import 'package:milestone_project/app_inherited_widget.dart';
-import 'package:milestone_project/core/dio/dio_provider.dart';
+import 'package:milestone_project/core/routes/app_route.dart';
 
 // import 'package:milestone_project/core/app_food/requests/nutrition_params.dart';
 import 'package:milestone_project/core/themes/theme_contrast.dart';
 import 'package:milestone_project/core/themes/theme_default.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:milestone_project/modules/home/view/home_page.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 void main() async {
-  var envName = const String.fromEnvironment('env_name', defaultValue: '');
+  var envName = const String.fromEnvironment('env_name', defaultValue: '.env');
   if (kDebugMode) {
     print('App get env name from build arguments $envName');
   }
@@ -60,18 +59,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ThemeCubit(),
-      child: BlocBuilder<ThemeCubit, ThemeData>(
-        builder: (_, theme) {
-          return AppInheritedWidget(
-            themeData: theme,
-            child: MaterialApp(
-              title: dotenv.get('APP_NAME'),
-              home: const HomePage(),
-            ),
-          );
-        },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AppBloc>(
+          create: (BuildContext context) => AppBloc(),
+        ),
+      ],
+      child: BlocProvider(
+        create: (_) => ThemeCubit(),
+        child: BlocBuilder<ThemeCubit, ThemeData>(
+          builder: (_, theme) {
+            return AppInheritedWidget(
+              themeData: theme,
+              isLoading:
+                  BlocProvider.of<AppBloc>(_, listen: true).state.isLoading,
+              showLoading: () => BlocProvider.of<AppBloc>(_, listen: false)
+                ..add(AppEventShowLoading()),
+              hideLoading: () => BlocProvider.of<AppBloc>(_, listen: false)
+                ..add(AppEventHideLoading()),
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: dotenv.get('APP_NAME'),
+                routes: AppRoute.ROUTES,
+                builder: (BuildContext context, Widget? child) {
+                  return App(child: child);
+                },
+              ),
+            );
+          },
+        ),
       ),
     );
   }

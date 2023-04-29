@@ -1,44 +1,19 @@
-import 'package:flutter/material.dart';
+part of 'app_bloc.dart';
 
-class AppState extends StatefulWidget {
+class AppState {
   const AppState({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+    required this.isLoading,
+  });
 
-  final Widget child;
+  final bool isLoading;
 
-  @override
-  State<AppState> createState() => _AppStateState();
-}
+  AppState.initial() : this(isLoading: false);
 
-class _AppStateState extends State<AppState> {
-  bool _isShowLoading = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(children: [
-      widget.child,
-      if (_isShowLoading)
-        const Opacity(
-          opacity: 0,
-          child: ModalBarrier(dismissible: false, color: Colors.black),
-        ),
-      if (_isShowLoading)
-        Center(
-          child: CircularProgressIndicator(
-            color: Theme.of(context).primaryColor,
-            backgroundColor: Colors.black.withOpacity(0.1),
-          ),
-        ),
-    ]);
+  AppState copyWith({
+    bool? isLoading,
+  }) {
+    return AppState(
+      isLoading: isLoading ?? this.isLoading,
+    );
   }
-
-  showLoading() => setState(() {
-        _isShowLoading = true;
-      });
-
-  hideLoading() => setState(() {
-        _isShowLoading = false;
-      });
 }
