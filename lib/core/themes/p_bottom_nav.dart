@@ -43,71 +43,78 @@ class _PBottomNavState extends State<PBottomNav> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 13, bottom: 6, left: 13),
-      height: 55,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(.5),
-            blurRadius: 20,
-            offset: const Offset(0, 20),
-          )
-        ],
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment(0.8, 1),
-          colors: <Color>[
-            Color(0xffF9373F),
-            Color(0xffC91339),
-          ],
-          tileMode: TileMode.mirror,
-        ),
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(10),
+        topRight: Radius.circular(10),
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(_icons.length, (index) {
-            TabItem icon = _icons[index];
-            bool isActive = _selectedTab == index;
+      child: Container(
+        margin: EdgeInsets.only(right: 13, bottom: 6, left: 13),
+        height: 55,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(.5),
+              blurRadius: 20,
+              offset: const Offset(0, 20),
+            )
+          ],
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment(0.8, 1),
+            colors: <Color>[
+              Color(0xffF9373F),
+              Color(0xffC91339),
+            ],
+            tileMode: TileMode.mirror,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(_icons.length, (index) {
+              TabItem icon = _icons[index];
+              bool isActive = _selectedTab == index;
 
-            return Stack(children: [
-              Positioned(
-                right: 15,
-                bottom: 0,
-                child: AnimatedContainer(
-                  curve: Curves.linearToEaseOut,
-                  duration: const Duration(milliseconds: 200),
-                  height: 4,
-                  width: isActive ? 25 : 0,
-                  decoration: BoxDecoration(
-                      color:
-                          AppInheritedWidget.of(context).themeData.dividerColor,
-                      borderRadius: BorderRadius.circular(2)),
+              return Stack(children: [
+                Positioned(
+                  right: 15,
+                  bottom: 0,
+                  child: AnimatedContainer(
+                    curve: Curves.linearToEaseOut,
+                    duration: const Duration(milliseconds: 200),
+                    height: 3,
+                    width: isActive ? 25 : 0,
+                    decoration: BoxDecoration(
+                        color: AppInheritedWidget.of(context)
+                            .themeData
+                            .dividerColor,
+                        borderRadius: BorderRadius.circular(2)),
+                  ),
                 ),
-              ),
-              CupertinoButton(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                onPressed: () => onTabPress(index),
-                child: AnimatedOpacity(
-                  opacity: isActive ? 1 : 0.6,
-                  duration: const Duration(milliseconds: 200),
-                  child: SizedBox(
-                    height: 36,
-                    width: 36,
-                    child: RiveAnimation.asset(
-                      'assets/riv/icons.riv',
-                      stateMachines: [icon.stateMachine],
-                      artboard: icon.artBoard,
-                      onInit: (artBoard) => _onRiveIconInit(artBoard, index),
+                CupertinoButton(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  onPressed: () => onTabPress(index),
+                  child: AnimatedOpacity(
+                    opacity: isActive ? 1 : 0.6,
+                    duration: const Duration(milliseconds: 200),
+                    child: SizedBox(
+                      height: 36,
+                      width: 36,
+                      child: RiveAnimation.asset(
+                        'assets/riv/icons.riv',
+                        stateMachines: [icon.stateMachine],
+                        artboard: icon.artBoard,
+                        onInit: (artBoard) => _onRiveIconInit(artBoard, index),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ]);
-          }),
+              ]);
+            }),
+          ),
         ),
       ),
     );
