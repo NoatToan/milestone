@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +8,6 @@ import 'package:milestone_project/app_bloc.dart';
 import 'package:milestone_project/app_inherited_widget.dart';
 import 'package:milestone_project/core/routes/app_route.dart';
 
-// import 'package:milestone_project/core/app_food/requests/nutrition_params.dart';
 import 'package:milestone_project/core/themes/theme_contrast.dart';
 import 'package:milestone_project/core/themes/theme_default.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -49,7 +50,7 @@ class AppBlocObserver extends BlocObserver {
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
     if (kDebugMode) {
-      print(transition);
+      log(transition.toString(), name: 'BLOC TRANSITION');
     }
   }
 }

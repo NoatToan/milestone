@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:milestone_project/app_bloc.dart';
 import 'package:milestone_project/app_inherited_widget.dart';
-import 'package:milestone_project/core/models/paginate/p_paginate.dart';
+import 'package:milestone_project/core/models/paginate/p_paginate_data.dart';
 
 part 'feed_event.dart';
 
@@ -14,21 +14,43 @@ part 'feed_state.dart';
 
 class FeedBloc extends Bloc<FeedEvent, FeedState> {
   FeedBloc() : super(FeedState.initial()) {
-    on<FeedEventInitial>((event, emit) {});
-    on<FeedEventReload>((event, emit) {
+    on<FeedEventInitial>((event, emit) async {
+      await Future.delayed(const Duration(seconds: 5), () {}).whenComplete(() {
+        emit(state.copyWith(
+          feedPaginate: state.feedPaginate.copyWith(
+            total: 10,
+            status: PPaginateStatusEnum.loaded,
+          ),
+        ));
+      });
+    });
+    on<FeedEventRefresh>((event, emit) {
       emit(state.copyWith(
         feedPaginate: state.feedPaginate.copyWith(
           total: 10,
         ),
       ));
     });
-    on<FeedEventReelLoadMore>((event, emit) {
+    on<FeedEventLoadMore>((event, emit) async {
+      if (state.feedPaginate.isLoading) {
+        return;
+      }
       emit(state.copyWith(
         feedPaginate: state.feedPaginate.copyWith(
-          total: state.feedPaginate.total + 10,
+          status: PPaginateStatusEnum.loading,
         ),
       ));
+
+      await Future.delayed(const Duration(seconds: 2), () {}).whenComplete(() {
+        emit(state.copyWith(
+          feedPaginate: state.feedPaginate.copyWith(
+            total: state.feedPaginate.total + 10,
+            status: PPaginateStatusEnum.loaded,
+          ),
+        ));
+      });
     });
-    on<FeedEventLoadMore>((event, emit) {});
+
+    on<FeedEventReelLoadMore>((event, emit) {});
   }
 }

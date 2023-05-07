@@ -10,7 +10,7 @@ import 'package:milestone_project/modules/food/view/mixins/feed_cta_mixin.dart';
 class FeedWidget extends StatefulWidget with FeedCTAMixin {
   const FeedWidget({
     Key? key,
-    required int this.keyItem,
+    required this.keyItem,
     required int this.totalImages,
   }) : super(key: key);
 

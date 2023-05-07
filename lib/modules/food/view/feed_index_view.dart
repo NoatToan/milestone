@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:milestone_project/app_inherited_widget.dart';
 import 'package:milestone_project/core/themes/headers/p_basic_header.dart';
-import 'package:milestone_project/modules/food/view/widgets/feed_horizontal_reel_widget.dart';
-import 'package:milestone_project/modules/food/view/widgets/feed_widget.dart';
+import 'package:milestone_project/core/widgets/paginate/p_list_view_paginate.dart';
 import 'package:milestone_project/modules/food/vm/feed_bloc.dart';
 
 class FeedIndexView extends StatelessWidget {
@@ -26,34 +25,28 @@ class FeedIndexView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
-            child: RefreshIndicator(
-              onRefresh: () async {
-                // TODO: handle loading in repository
-                AppInheritedWidget.of(context).showLoading();
-                BlocProvider.of<FeedBloc>(context).add(FeedEventReload());
-                Future.delayed(const Duration(seconds: 2), () {
-                  AppInheritedWidget.of(context).hideLoading();
-                });
+            child: BlocBuilder<FeedBloc, FeedState>(
+              builder: (context, state) {
+                bool isReachEnd = state.feedPaginate.total >= 10;
+                return PListViewPaginate(
+                  paginateData: state.feedPaginate,
+                  onRefresh: () async {
+                    // TODO: handle loading in repository
+
+                    /// Uncomment this to show all screen loading
+                    // AppInheritedWidget.of(context).showLoading();
+                    BlocProvider.of<FeedBloc>(context).add(FeedEventRefresh());
+
+                    /// Uncomment this to hide all screen loading
+                    // Future.delayed(const Duration(seconds: 2), () {
+                    //   AppInheritedWidget.of(context).hideLoading();
+                    // });
+                  },
+                  onLoadMore: () {
+                    BlocProvider.of<FeedBloc>(context).add(FeedEventLoadMore());
+                  },
+                );
               },
-              child: BlocBuilder<FeedBloc, FeedState>(
-                builder: (context, state) {
-                  return ListView.builder(
-                    itemCount: state.feedPaginate.total,
-                    itemBuilder: (BuildContext context, int index) {
-                      /*
-                    * First item is horizontal reel list. Do not to remove when Pull to Refresh
-                    */
-                      if (index == 0) {
-                        return FeedHorizontalReelWidget();
-                      }
-                      return FeedWidget(
-                        keyItem: index,
-                        totalImages: 5,
-                      );
-                    },
-                  );
-                },
-              ),
             ),
           ),
         ],

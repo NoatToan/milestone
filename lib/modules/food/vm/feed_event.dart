@@ -10,12 +10,7 @@ class FeedEventInitial extends FeedEvent {
 // Feed
 class FeedEventLoadMore extends FeedEvent {}
 
-class FeedEventReload extends FeedEvent {}
+class FeedEventRefresh extends FeedEvent {}
 
 // Reel
 class FeedEventReelLoadMore extends FeedEvent {}
-
-// Common event
-class FeedEventOnProgress extends FeedEvent {}
-
-class FeedEventOnDone extends FeedEvent {}

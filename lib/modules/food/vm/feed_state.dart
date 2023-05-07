@@ -6,18 +6,18 @@ class FeedState {
     required this.feedPaginate,
   });
 
-  final PPaginate<dynamic> reelPaginate;
-  final PPaginate<dynamic> feedPaginate;
+  final PPaginateData<dynamic> reelPaginate;
+  final PPaginateData<dynamic> feedPaginate;
 
   FeedState.initial()
       : this(
-          reelPaginate: PPaginate(total: 1),
-          feedPaginate: PPaginate(total: 1),
+          reelPaginate: PPaginateData(total: 1),
+          feedPaginate: PPaginateData(total: 1),
         );
 
   FeedState copyWith({
-    PPaginate<dynamic>? reelPaginate,
-    PPaginate<dynamic>? feedPaginate,
+    PPaginateData<dynamic>? reelPaginate,
+    PPaginateData<dynamic>? feedPaginate,
   }) {
     return FeedState(
       reelPaginate: reelPaginate ?? this.reelPaginate,
