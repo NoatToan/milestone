@@ -4,6 +4,7 @@ import 'package:milestone_project/core/models/model_user.dart';
 class AppInheritedWidget extends InheritedWidget {
   const AppInheritedWidget({
     super.key,
+    required this.context,
     required this.themeData,
     required this.showLoading,
     required this.hideLoading,
@@ -11,6 +12,8 @@ class AppInheritedWidget extends InheritedWidget {
     required super.child,
     this.auth = ModelUser.ex,
   });
+
+  final BuildContext context;
 
   final ThemeData themeData;
 

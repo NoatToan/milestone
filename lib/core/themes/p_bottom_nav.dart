@@ -49,7 +49,11 @@ class _PBottomNavState extends State<PBottomNav> {
         topRight: Radius.circular(10),
       ),
       child: Container(
-        margin: EdgeInsets.only(right: 13, bottom: 6, left: 13),
+        margin: EdgeInsets.only(
+          right: 13,
+          bottom: MediaQuery.of(context).padding.bottom,
+          left: 13,
+        ),
         height: 55,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24),

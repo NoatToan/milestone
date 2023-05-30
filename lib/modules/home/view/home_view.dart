@@ -5,7 +5,6 @@ import 'package:milestone_project/app_inherited_widget.dart';
 import 'package:milestone_project/core/factories/factory_model.dart';
 import 'package:milestone_project/core/routes/app_route.dart';
 import 'package:milestone_project/main.dart';
-import 'package:milestone_project/modules/counter/counter.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -21,27 +20,6 @@ class HomeView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                ElevatedButton(
-                  child: const Text('Goto Bloc counter'),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        /// nav to new page
-                        builder: (context) => const CounterPage(),
-
-                        /// nav to new app
-                        // builder: (context) => const CounterApp(),
-                      ),
-                    );
-                  },
-                ),
-                ElevatedButton(
-                  child: const Text('My app'),
-                  onPressed: () {
-                    Navigator.pushNamed(context, AppRouteNames.FOOD);
-                  },
-                ),
                 ElevatedButton(
                   child: const Text('Fake usernames'),
                   onPressed: () {

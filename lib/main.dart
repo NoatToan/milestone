@@ -11,6 +11,7 @@ import 'package:milestone_project/core/routes/app_route.dart';
 import 'package:milestone_project/core/themes/theme_contrast.dart';
 import 'package:milestone_project/core/themes/theme_default.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:milestone_project/modules/setting/views/setting_profile_page.dart';
 
 void main() async {
   var envName = const String.fromEnvironment('env_name', defaultValue: '.env');
@@ -71,6 +72,7 @@ class MyApp extends StatelessWidget {
         child: BlocBuilder<ThemeCubit, ThemeData>(
           builder: (_, theme) {
             return AppInheritedWidget(
+              context: context,
               themeData: theme,
               isLoading:
                   BlocProvider.of<AppBloc>(_, listen: true).state.isLoading,
@@ -81,7 +83,7 @@ class MyApp extends StatelessWidget {
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,
                 title: dotenv.get('APP_NAME'),
-                routes: AppRoute.ROUTES,
+                routes: AppRoute.MAIN_ROUTES,
                 builder: (BuildContext context, Widget? child) {
                   return App(child: child);
                 },

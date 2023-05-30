@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:milestone_project/core/routes/app_route.dart';
 import 'package:milestone_project/core/themes/p_bottom_nav.dart';
 import 'package:milestone_project/modules/food/view/feed_index_page.dart';
 import 'package:milestone_project/modules/home/view/home_page.dart';
@@ -26,11 +27,24 @@ class _AppState extends State<App> {
       extendBody: true,
       body: IndexedStack(
         index: _selectedIndex,
-        children: const [
-          HomePage(),
-          FeedIndexPage(),
-          ProfileIndexPage(),
-          SettingIndexPage(),
+        children: [
+          MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: HomePage(),
+          ),
+          MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: FeedIndexPage(),
+          ),
+          MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: ProfileIndexPage(),
+          ),
+          MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: SettingIndexPage(),
+            routes: AppRoute.SETTING_ROUTES,
+          )
         ],
       ),
       bottomNavigationBar: PBottomNav(

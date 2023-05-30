@@ -14,12 +14,15 @@ abstract class AppBaseView extends StatefulWidget {
 
   Text get textTitle => const Text('HEADER TITLE');
 
+  get appBar => null;
+
+  bool get extendBodyBehindAppBar => false;
+
   @override
   State<AppBaseView> createState() => _AppBaseViewState();
 }
 
 class _AppBaseViewState extends State<AppBaseView> {
-
   Widget floatingActionButton(BuildContext context) => const SizedBox();
 
   @override
@@ -32,12 +35,13 @@ class _AppBaseViewState extends State<AppBaseView> {
       data: AppInheritedWidget.of(context).themeData,
       child: Scaffold(
         // TODO: load dynamic layout scaffold
-        appBar: PreferredSize(
-          preferredSize: Size.zero,
-          child: Container(
-            color: AppInheritedWidget.of(context).themeData.primaryColor,
-          ),
-        ),
+        appBar: widget.appBar ??
+            PreferredSize(
+              preferredSize: Size.zero,
+              child: Container(
+                color: AppInheritedWidget.of(context).themeData.primaryColor,
+              ),
+            ),
         body: Stack(children: [
           widget.body(context),
           if (BlocProvider.of<AppBloc>(context, listen: true).state.isLoading)
@@ -57,6 +61,7 @@ class _AppBaseViewState extends State<AppBaseView> {
         floatingActionButton: floatingActionButton(context),
         extendBody: true,
         bottomNavigationBar: null,
+        extendBodyBehindAppBar: widget.extendBodyBehindAppBar,
       ),
     );
   }

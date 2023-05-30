@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:milestone_project/app_inherited_widget.dart';
+import 'package:milestone_project/core/blocs/feed/feed_bloc.dart';
 import 'package:milestone_project/core/themes/headers/p_basic_header.dart';
 import 'package:milestone_project/core/widgets/paginate/p_list_view_paginate.dart';
-import 'package:milestone_project/modules/food/vm/feed_bloc.dart';
 
 class FeedIndexView extends StatelessWidget {
   final ScrollController _scrollController = ScrollController();

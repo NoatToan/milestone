@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:milestone_project/core/themes/scaffold/app_base_view.dart';
-import 'package:milestone_project/modules/counter/counter.dart';
 import 'package:milestone_project/modules/home/view/home_view.dart';
 
 /// {@template counter_page}
